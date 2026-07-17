@@ -1,0 +1,57 @@
+name: Publish
+
+# One release = one `v*` tag. opencode-proxy is consumed as a git SUBMODULE (not npm), so this
+# publishes ONLY the JVM ProxyPlugin jar as a github release asset on the v-release, so the
+# example-server org-scan finds `opencode-proxy-proxy.jar` on releases/latest. The npm build +
+# vitest run first purely as CI gates.
+on:
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: write   # create the v-release for the jar asset
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Guard against runaway patch versions
+        run: |
+          PATCH="${GITHUB_REF_NAME##*.}"
+          if [ "${PATCH:-0}" -ge 20 ]; then
+            echo "::error::Tag ${GITHUB_REF_NAME} has patch >= 20 - bump the minor version (reset patch) instead of more patches."
+            exit 1
+          fi
+
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # CI gates: TS build + tests must be green before we ship the jar.
+      - run: npm install
+      - run: npm run build
+      - run: npx vitest run
+      - run: chmod +x java/gradlew
+      # JVM parity gate: the passthrough ProxyPlugin unit test.
+      - name: Run JVM test
+        working-directory: java
+        run: ./gradlew :opencode-proxy-plugin:test
+
+      # Publish the ProxyPlugin jar onto the v-release. github.token (contents:write) suffices to create
+      # the release; the module needs no published dependency (compileOnly :routing from the submodule).
+      - name: Publish proxy jar
+        working-directory: java
+        run: ./gradlew :opencode-proxy-plugin:jar :opencode-proxy-plugin:publishGithub -Partifact_version=${{ github.ref_name }} -x test -x compileTestJava
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ github.token }}

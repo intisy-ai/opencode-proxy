@@ -1,0 +1,56 @@
+// opencode-proxy's Java module -- self-contained Gradle build living alongside opencode-proxy's TS
+// (../src, ../package.json), mirroring claude-code-proxy's java/build.gradle. Simpler still: no
+// TeaVM module (there is no logic worth single-sourcing here) -- :opencode-proxy-plugin depends on
+// :routing ONLY (no ai-java jvm backend, no core-auth, no composite includeBuild).
+plugins {
+    id "io.github.intisy.github-gradle" version "1.8.2.1" apply false
+}
+
+subprojects {
+    apply plugin: "java-library"
+    apply plugin: "io.github.intisy.github-gradle"
+
+    group = "io.github.intisy"
+    // publishGithub requires a concrete version. Derive it from -Partifact_version=<tag> passed by
+    // CI (stripping a leading "v"), falling back to a local dev version.
+    version = (project.findProperty("artifact_version") ?: "0.0.0-dev").toString().replaceFirst(/^v/, "")
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    java {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    // Validate the MAIN compilation against the Java 8 API surface (not just source syntax).
+    // compileTestJava is excluded: tests may legitimately use newer JDK APIs.
+    tasks.matching { it.name == "compileJava" }.configureEach {
+        options.release = 8
+    }
+
+    // Force UTF-8 source encoding for every compile task, regardless of platform default charset.
+    tasks.withType(JavaCompile).configureEach {
+        options.encoding = "UTF-8"
+    }
+
+    dependencies {
+        testImplementation "org.junit.jupiter:junit-jupiter:5.10.1"
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    github {
+        accessToken = System.getenv("GITHUB_TOKEN") ?: ""
+    }
+
+    // Only :opencode-proxy-plugin is a published artifact (:routing is aliased from core-proxy) --
+    // scope publishGithub so an aggregate `publish` doesn't fail on the non-library module.
+    tasks.matching { it.name == "publishGithub" }.configureEach {
+        onlyIf { project.path == ":opencode-proxy-plugin" }
+    }
+}
