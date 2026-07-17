@@ -1,0 +1,10 @@
+rootProject.name = "opencode-proxy-java"
+
+// Alias :routing (SPIs incl. ProxyPlugin, RoutingProfile, RateLimitInfo) from the nested core-proxy
+// submodule, exactly as claude-code-proxy's java/settings.gradle does. opencode has no TeaVM logic
+// to single-source (the passthrough nativeRateLimit is trivial) -- no :teavm include, no teavm module.
+include ":routing"
+project(":routing").projectDir = file("../core-proxy/java/routing")
+
+// :opencode-proxy-plugin -- the publishable *-proxy*.jar (OpencodeProxyPlugin, passthrough profile).
+include ":opencode-proxy-plugin"
