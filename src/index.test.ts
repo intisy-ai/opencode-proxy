@@ -1,6 +1,5 @@
-// NOTE: this barrel re-exports "../core-proxy/dist/index.js" (src/index.ts), so
-// this test can only run once the controller adds the core-proxy submodule and
-// builds it (Task F) — the import itself fails to resolve before that. Mirrors
+// This barrel re-exports "../core-proxy/dist/index.js", so this test can only run once
+// core-proxy is built as a submodule; the import fails to resolve before that. Mirrors
 // claude-code-proxy's own index.test.ts, which has the identical dependency.
 import { expect, it } from "vitest";
 import { createProxyServer, makeDynamicResolver, resolveModelMap, opencodeProfile, isValidProfile } from "./index.js";

@@ -1,8 +1,7 @@
-// SP-3 T3a: proves the IR front-door is ACTIVE on the real opencodeProfile (not a hand-rolled
-// stand-in) -- opencodeProfile() now carries core-ir's real AnthropicTranslator (OpenCode speaks
-// Anthropic wire), so an inbound request decodes to IR, routes on IrRequest.model, reaches a
-// handleIr-capable handler, and the IrResponse is encoded back to Anthropic wire by
-// createProxyServer (core-proxy).
+// Proves the IR front-door is active on the real opencodeProfile (not a hand-rolled stand-in):
+// opencodeProfile() carries core-ir's real AnthropicTranslator (OpenCode speaks Anthropic wire),
+// so an inbound request decodes to IR, routes on IrRequest.model, reaches a handleIr-capable
+// handler, and the IrResponse is encoded back to Anthropic wire by createProxyServer (core-proxy).
 import { afterEach, beforeEach, expect, it } from "vitest";
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
