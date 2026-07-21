@@ -2,7 +2,7 @@
 // upstream provider's models directly (no Claude-style tiers) and routes by
 // exact model-id match, so this profile carries an empty tier chain and a
 // never-matching tierRegex (no Routing UI). nativeRateLimit forwards the
-// upstream provider's own 429 response verbatim — it never synthesizes an
+// upstream provider's own 429 response verbatim, it never synthesizes an
 // Anthropic-shaped rate-limit body, because opencode has nothing to do with
 // Claude/Anthropic.
 
@@ -18,7 +18,7 @@ async function nativeRateLimit(info: RateLimitInfo): Promise<{ status: number; h
   }
 
   // No upstream response to pass through (every model in the chain failed before
-  // reaching a provider) — fall back to a minimal generic 429.
+  // reaching a provider), fall back to a minimal generic 429.
   return {
     status: 429,
     headers: { "content-type": "application/json" },
@@ -38,7 +38,7 @@ const OPENCODE_PROFILE: RoutingProfile = {
   defaultContext: 200000,
   defaultOutput: 64000,
   nativeRateLimit,
-  // SP-3 T3a: OpenCode speaks Anthropic wire too, so the IR front-door uses core-ir's real
+  // OpenCode speaks Anthropic wire too, so the IR front-door uses core-ir's real
   // AnthropicTranslator for this profile (server.ts's route() decodes/encodes through it).
   translator: translators.anthropic,
 };

@@ -11,10 +11,10 @@ import java.util.regex.Pattern;
 
 /**
  * The opencode ProxyPlugin: a PASSTHROUGH proxy exposing every installed provider's models to
- * opencode. No tiers (unlike claude-code-proxy) — the core-proxy Router serves each requested model
+ * opencode. No tiers (unlike claude-code-proxy), the core-proxy Router serves each requested model
  * by direct catalog match across all providers, and /v1/models aggregates the whole catalog. The
  * profile carries empty tiers + a never-match tierRegex so no tier UI is rendered, and a passthrough
- * nativeRateLimit that returns the upstream provider's own response (opencode is provider-agnostic —
+ * nativeRateLimit that returns the upstream provider's own response (opencode is provider-agnostic,
  * nothing Anthropic/Claude-specific here).
  */
 public final class OpencodeProxyPlugin implements ProxyPlugin {

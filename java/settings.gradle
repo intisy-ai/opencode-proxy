@@ -7,7 +7,7 @@ include ":routing"
 project(":routing").projectDir = file("../core-proxy/java/routing")
 
 // :ir - core-ir's canonical IR types + vendor translators (AnthropicTranslator etc.), aliased in
-// exactly like :routing above (SP-3 T3a). core-ir is a DIRECT submodule of opencode-proxy
+// exactly like :routing above. core-ir is a DIRECT submodule of opencode-proxy
 // (../core-ir from here, i.e. opencode-proxy/core-ir), not nested inside core-proxy. :routing's
 // build.gradle references project(":ir") so this alias must resolve wherever :routing is
 // included, exactly as claude-code-auth's/claude-code-proxy's java/settings.gradle does.
