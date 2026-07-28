@@ -7,7 +7,7 @@
 // Claude/Anthropic.
 
 import type { RateLimitInfo, RoutingProfile } from "../../core-proxy/dist/index.js";
-import { translators } from "../../core-ir/dist/index.js";
+import { anthropicTranslator } from "../../anthropic-translator/dist/index.js";
 
 async function nativeRateLimit(info: RateLimitInfo): Promise<{ status: number; headers: Record<string, string>; body: string }> {
   const upstream = info.upstream;
@@ -38,9 +38,9 @@ const OPENCODE_PROFILE: RoutingProfile = {
   defaultContext: 200000,
   defaultOutput: 64000,
   nativeRateLimit,
-  // OpenCode speaks Anthropic wire too, so the IR front-door uses core-ir's real
+  // OpenCode speaks Anthropic wire too, so the IR front-door uses anthropic-translator's
   // AnthropicTranslator for this profile (server.ts's route() decodes/encodes through it).
-  translator: translators.anthropic,
+  translator: anthropicTranslator,
 };
 
 export function opencodeProfile(overrides?: Partial<RoutingProfile>): RoutingProfile {
