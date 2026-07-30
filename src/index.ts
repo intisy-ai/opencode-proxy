@@ -4,8 +4,9 @@ export { opencodeProfile } from "./profiles/opencode.js";
 import { opencodeProfile } from "./profiles/opencode.js";
 import type { RoutingProfile } from "../core-proxy/dist/index.js";
 
-export const proxyDef: { app: "opencode"; label: string; profile: () => RoutingProfile } = {
+export const proxyDef: { app: "opencode"; label: string; setup: string; profile: () => RoutingProfile } = {
   app: "opencode",
   label: "OpenCode",
+  setup: "Point your OpenCode provider's baseURL at the local API base URL. The OpenCode loader configures this for you.",
   profile: opencodeProfile,
 };
