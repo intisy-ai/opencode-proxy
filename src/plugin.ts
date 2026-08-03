@@ -1,14 +1,13 @@
 // OpenCode plugin entry: on load, (re)deploy the front-door adapter to the generic home path so
-// core-auth (in each provider) resolves it. Backstop for the install-time deploy (build.mjs); both
-// are idempotent. Self-contained (no core-* submodule) since opencode-proxy nests none.
+// core-auth (in each provider) resolves it. Backstop for the install-time deploy
+// (scripts/postbuild-deploy.mjs); both are idempotent. Self-contained (no core-* submodule) since
+// opencode-proxy nests none.
 import { homedir } from "os";
 import { join } from "path";
 import { deployFrontDoor } from "./deploy.js";
 
 function configDir(): string {
-  if (process.env.HUB_CONFIG_DIR) return process.env.HUB_CONFIG_DIR;
-  const isClaude = process.argv.join(" ").includes("claude");
-  return isClaude ? join(homedir(), ".claude") : join(homedir(), ".config", "opencode");
+  return process.env.HUB_CONFIG_DIR ?? join(homedir(), ".config", "opencode");
 }
 
 export async function activate() {

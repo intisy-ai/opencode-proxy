@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { mkdtempSync, existsSync, writeFileSync, mkdirSync } from "fs";
+import { mkdtempSync, existsSync } from "fs";
 import { tmpdir } from "os";
 import { join } from "path";
 import { frontDoorDeployPath, deployFrontDoor } from "../deploy.js";
