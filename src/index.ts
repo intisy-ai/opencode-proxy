@@ -2,6 +2,9 @@ export * from "../core-proxy/dist/index.js";
 export { opencodeProfile } from "./profiles/opencode.js";
 export { serveDirect } from "./serve-direct.js";
 export { appFrontDoor } from "./frontdoor.js";
+export { frontDoorDeployPath, deployFrontDoor } from "./deploy.js";
+export { activate } from "./plugin.js";
+export { default } from "./plugin.js";
 
 import { opencodeProfile } from "./profiles/opencode.js";
 import type { RoutingProfile } from "../core-proxy/dist/index.js";
