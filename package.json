@@ -1,6 +1,6 @@
 {
   "name": "opencode-proxy",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "The OpenCode proxy layer (opencodeProfile) on top of the generic core-proxy engine",
   "type": "module",
   "main": "dist/index.js",
