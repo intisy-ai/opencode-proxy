@@ -9,9 +9,11 @@ provider's `baseURL` at the proxy, so it talks the Anthropic `/v1/messages`
 format and expects the Anthropic-shaped error body on rate limit, the same
 contract `claude-code-proxy` already serves for Claude Code.
 
-This is a **library repo consumed as a git submodule and bundled from
+This is a **library repo consumed as a git submodule and compiled from
 source** (the same treatment as `core` / `core-auth` / `core-loader` /
-`core-proxy` / `claude-code-proxy`), it is not published to npm.
+`core-proxy` / `claude-code-proxy`). A first version exists on npm as
+`@intisy-ai/opencode-proxy`, but this repo's release workflow ships only the
+JVM ProxyPlugin jar, so that package is not yet part of the release path.
 
 This project carries **no generic engine code**; the routing engine
 (`:34567` daemon, tier→provider chains, rate-limit fallback, model rewrite,
