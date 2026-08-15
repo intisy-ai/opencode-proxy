@@ -5,3 +5,4 @@ java/.gradle/
 docs/
 .superpowers/
 graphify-out/
+.idea/
