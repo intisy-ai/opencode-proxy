@@ -1,3 +1,7 @@
+plugins {
+    id "org.gradle.toolchains.foojay-resolver-convention" version "0.8.0"
+}
+
 rootProject.name = "opencode-proxy-java"
 
 // Alias :routing (SPIs incl. ProxyPlugin, RoutingProfile, RateLimitInfo) from the nested core-proxy
