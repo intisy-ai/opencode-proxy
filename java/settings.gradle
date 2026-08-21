@@ -10,6 +10,12 @@ rootProject.name = "opencode-proxy-java"
 include ":routing"
 project(":routing").projectDir = file("../core-proxy/java/routing")
 
+// :spi - the plugin-to-host contract the engine routes against, from core-contracts, reached
+// through core-proxy's own clone of it exactly as :ir is reached through this repo's core-ir below.
+// :routing declares an `api` dependency on it, so this module's own Java source is unchanged.
+include ":spi"
+project(":spi").projectDir = file("../core-proxy/core-contracts/java/spi")
+
 // :ir - core-ir's canonical IR types + vendor translators (AnthropicTranslator etc.), aliased in
 // exactly like :routing above. core-ir is a DIRECT submodule of opencode-proxy
 // (../core-ir from here, i.e. opencode-proxy/core-ir), not nested inside core-proxy. :routing's
