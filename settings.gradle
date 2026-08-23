@@ -1,0 +1,38 @@
+plugins {
+    id "org.gradle.toolchains.foojay-resolver-convention" version "0.8.0"
+}
+
+rootProject.name = "opencode-proxy-java"
+
+// Alias :routing (SPIs incl. ProxyPlugin, RoutingProfile, RateLimitInfo) from the nested core-proxy
+// submodule, exactly as claude-code-proxy's java/settings.gradle does. opencode has no TeaVM logic
+// to single-source (the passthrough nativeRateLimit is trivial) -- no :teavm include, no teavm module.
+// The routing engine, from this repo's nested core-proxy submodule. Every alias reaching api or
+// core-ir goes through core-proxy's OWN clones so this build carries exactly one :ir and one api:
+// two projectDirs claiming the same project path is a Gradle collision.
+include ":routing"
+project(":routing").projectDir = file("core-proxy/routing")
+
+// :proxy-contracts - the routing vocabulary this plugin implements, and the front-door key
+// core-proxy mints. Apart from :routing so a plugin implementing it does not link the engine.
+include ":proxy-contracts"
+project(":proxy-contracts").projectDir = file("core-proxy/proxy-contracts")
+
+// :ir - core-ir's canonical IR types and the IrHandler seam the engine routes over.
+include ":ir"
+project(":ir").projectDir = file("core-proxy/core-ir/ir")
+
+// :annotations, :processor, :contract, :seam and :js-base come from api: :ir exports api's seam types in
+// HandlerCtx's public fields, so every module here must resolve api at one coordinate.
+include ":annotations"
+project(":annotations").projectDir = file("core-proxy/core-ir/api/annotations")
+include ":processor"
+project(":processor").projectDir = file("core-proxy/core-ir/api/processor")
+include ":contract"
+project(":contract").projectDir = file("core-proxy/core-ir/api/contract")
+include ":seam"
+project(":seam").projectDir = file("core-proxy/core-ir/api/seam")
+include ":js-base"
+project(":js-base").projectDir = file("core-proxy/core-ir/api/js-base")
+
+include ":opencode-proxy-plugin"
