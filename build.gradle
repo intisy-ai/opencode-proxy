@@ -3,7 +3,7 @@
 // TeaVM module (there is no logic worth single-sourcing here) -- :opencode-proxy-plugin depends on
 // :routing ONLY (no ai-java jvm backend, no core-auth, no composite includeBuild).
 plugins {
-    id "io.github.intisy.github-gradle" version "1.8.2.1" apply false
+    id "io.github.intisy.github-gradle" version "1.10.3" apply false
 }
 
 subprojects {
