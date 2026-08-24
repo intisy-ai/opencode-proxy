@@ -1,4 +1,4 @@
-export * from "../core-proxy/dist/index.js";
+export * from "@intisy-ai/core-proxy";
 export { opencodeProfile } from "./profiles/opencode.js";
 export { serveDirect } from "./serve-direct.js";
 export { appFrontDoor } from "./frontdoor.js";
@@ -7,7 +7,7 @@ export { activate } from "./plugin.js";
 export { default } from "./plugin.js";
 
 import { opencodeProfile } from "./profiles/opencode.js";
-import type { RoutingProfile } from "../core-proxy/dist/index.js";
+import type { RoutingProfile } from "@intisy-ai/core-proxy";
 
 export const proxyDef: { app: "opencode"; label: string; setup: string; profile: () => RoutingProfile } = {
   app: "opencode",

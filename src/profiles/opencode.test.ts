@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 import { opencodeProfile } from "./opencode.js";
-import { isValidProfile } from "../../core-proxy/dist/index.js";
+import { isValidProfile } from "@intisy-ai/core-proxy";
 
 it("opencodeProfile: passes isValidProfile", () => {
   expect(isValidProfile(opencodeProfile())).toBe(true);
