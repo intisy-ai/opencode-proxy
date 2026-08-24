@@ -3,7 +3,7 @@ package io.github.intisy.ai.opencodeproxy;
 import io.github.intisy.ai.shared.routing.ProxyPlugin;
 import io.github.intisy.ai.shared.routing.RateLimitInfo;
 import io.github.intisy.ai.shared.routing.RoutingProfile;
-import io.github.intisy.ai.shared.spi.http.HttpResponse;
+import io.github.intisy.ai.api.seam.HttpResponse;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashMap;

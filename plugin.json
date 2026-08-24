@@ -1,0 +1,14 @@
+{
+  "$schema": "https://intisy-ai.github.io/api/schema/plugin.schema.json",
+  "id": "opencode-proxy",
+  "api": 1,
+  "entry": "dist/front-door-plugin.js",
+  "displayName": "OpenCode proxy",
+  "capabilities": ["front-door"],
+  "repo": {
+    "role": "OpenCode proxy layer",
+    "category": "app-proxy",
+    "domains": ["opencode"],
+    "tech": "typescript"
+  }
+}

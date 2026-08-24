@@ -1,7 +1,9 @@
 node_modules/
 dist/
-java/**/build/
-java/.gradle/
+build/
+*/build/
+.gradle/
 docs/
 .superpowers/
 graphify-out/
+.idea/

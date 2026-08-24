@@ -6,8 +6,8 @@
 // Anthropic-shaped rate-limit body, because opencode has nothing to do with
 // Claude/Anthropic.
 
-import type { RateLimitInfo, RoutingProfile } from "../../core-proxy/dist/index.js";
-import { anthropicTranslator } from "../../anthropic-translator/dist/index.js";
+import type { RateLimitInfo, RoutingProfile } from "@intisy-ai/core-proxy";
+import { anthropicTranslator } from "@intisy-ai/anthropic-translator";
 
 async function nativeRateLimit(info: RateLimitInfo): Promise<{ status: number; headers: Record<string, string>; body: string }> {
   const upstream = info.upstream;
