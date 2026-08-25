@@ -1,5 +1,3 @@
-# opencode-proxy
-
 The OpenCode proxy layer on top of the generic `core-proxy` engine.
 It provides `opencodeProfile` (the config filename, tier order/fallback,
 tier regex, env-var prefix, default context/output limits, and the native
@@ -8,12 +6,10 @@ OpenCode. OpenCode consumes it by pointing an `@ai-sdk/anthropic` custom
 provider's `baseURL` at the proxy, so it talks the Anthropic `/v1/messages`
 format and expects the Anthropic-shaped error body on rate limit, the same
 contract `claude-code-proxy` already serves for Claude Code.
-
 This is a **library repo consumed as a published npm package**, the same
 treatment as `core` / `core-auth` / `core-loader` / `core-proxy` /
 `claude-code-proxy`. Its release workflow ships `@intisy-ai/opencode-proxy`
 alongside the JVM ProxyPlugin jar.
-
 This project carries **no generic engine code**; the routing engine
 (`:34567` daemon, tier→provider chains, rate-limit fallback, model rewrite,
 the node↔web request adapter) lives entirely in `core-proxy`, taken here as an
@@ -77,7 +73,3 @@ underlying provider(s).
 `npm run build && npx vitest run` builds the nested `core-proxy` engine
 first, then this project's own `src`, then runs the `opencodeProfile` tests
 plus a barrel smoke test asserting the re-exported surface.
-
-## License
-
-MIT
