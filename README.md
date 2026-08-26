@@ -1,5 +1,10 @@
 # opencode-proxy
 
+[![npm version](https://img.shields.io/npm/v/opencode-proxy)](https://www.npmjs.com/package/opencode-proxy)
+[![npm downloads](https://img.shields.io/npm/dm/opencode-proxy)](https://www.npmjs.com/package/opencode-proxy)
+
+The OpenCode proxy layer (opencodeProfile) on top of the generic core-proxy engine
+
 The OpenCode proxy layer on top of the generic `core-proxy` engine.
 It provides `opencodeProfile` (the config filename, tier order/fallback,
 tier regex, env-var prefix, default context/output limits, and the native
@@ -8,24 +13,18 @@ OpenCode. OpenCode consumes it by pointing an `@ai-sdk/anthropic` custom
 provider's `baseURL` at the proxy, so it talks the Anthropic `/v1/messages`
 format and expects the Anthropic-shaped error body on rate limit, the same
 contract `claude-code-proxy` already serves for Claude Code.
-
-This is a **library repo consumed as a git submodule and compiled from
-source** (the same treatment as `core` / `core-auth` / `core-loader` /
-`core-proxy` / `claude-code-proxy`). A first version exists on npm as
-`@intisy-ai/opencode-proxy`, but this repo's release workflow ships only the
-JVM ProxyPlugin jar, so that package is not yet part of the release path.
-
+This is a **library repo consumed as a published npm package**, the same
+treatment as `core` / `core-auth` / `core-loader` / `core-proxy` /
+`claude-code-proxy`. Its release workflow ships `@intisy-ai/opencode-proxy`
+alongside the JVM ProxyPlugin jar.
 This project carries **no generic engine code**; the routing engine
 (`:34567` daemon, tier→provider chains, rate-limit fallback, model rewrite,
-the node↔web request adapter) lives entirely in `core-proxy`, nested here as
-a submodule. `opencode-proxy` only supplies the OpenCode-specific profile
+the node↔web request adapter) lives entirely in `core-proxy`, taken here as an
+npm dependency. `opencode-proxy` only supplies the OpenCode-specific profile
 that parameterizes that engine.
 
 ## Structure
 
-- `core-proxy/`: the generic routing engine, nested as a git submodule
-  (compiled separately into `core-proxy/dist`, excluded from this project's
-  own `tsconfig.json`).
 - `src/profiles/opencode.ts`: `opencodeProfile()`, the OpenCode
   `RoutingProfile` (config file, tier order/fallback, tier regex, env
   prefix, default context/output, `nativeRateLimit`).
@@ -84,4 +83,4 @@ plus a barrel smoke test asserting the re-exported surface.
 
 ## License
 
-MIT
+[![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
