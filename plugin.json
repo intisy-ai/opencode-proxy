@@ -4,11 +4,24 @@
   "api": 1,
   "entry": "dist/front-door-plugin.js",
   "displayName": "OpenCode proxy",
-  "capabilities": ["front-door"],
+  "capabilities": [
+    "front-door"
+  ],
+  "publish": {
+    "scopedOnly": true,
+    "jarModule": [
+      "opencode-proxy-plugin"
+    ],
+    "jarPretest": true
+  },
   "repo": {
     "role": "OpenCode proxy layer",
     "category": "app-proxy",
-    "domains": ["opencode"],
-    "tech": "typescript"
+    "domains": [
+      "opencode"
+    ],
+    "tech": [
+      "typescript"
+    ]
   }
 }
