@@ -43,6 +43,12 @@ const OPENCODE_PROFILE: RoutingProfile = {
   translator: anthropicTranslator,
 };
 
+/**
+ * This app's routing profile: its tiers, its model patterns, and its rate-limit shape.
+ *
+ * @param overrides what a caller wants to differ, for a test or a variant deployment.
+ * @returns the profile the engine routes with.
+ */
 export function opencodeProfile(overrides?: Partial<RoutingProfile>): RoutingProfile {
   return { ...OPENCODE_PROFILE, ...overrides };
 }

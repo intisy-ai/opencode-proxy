@@ -9,6 +9,7 @@ export { default } from "./plugin.js";
 import { opencodeProfile } from "./profiles/opencode.js";
 import type { RoutingProfile } from "@intisy-ai/core-proxy";
 
+/** What a host needs to offer this app as a proxy target: who it is, and how to point it here. */
 export const proxyDef: { app: "opencode"; label: string; setup: string; profile: () => RoutingProfile } = {
   app: "opencode",
   label: "OpenCode",

@@ -31,6 +31,13 @@ function authMethods(def: any, tk: any) {
   }];
 }
 
+/**
+ * This app's own wire format, as the front door a provider is served through.
+ *
+ * @remarks
+ * Published rather than imported: `core-auth` sits in the same layer as this repo, so it resolves
+ * this at run time from the deployed adapter instead of linking it.
+ */
 export const appFrontDoor = {
   serve(request: Request, handleIr: any, ctx: any): Promise<Response> { return serveDirect(request, handleIr, ctx); },
   buildPluginHooks(def: any, input: any, tk: any) {
