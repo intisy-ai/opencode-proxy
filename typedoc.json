@@ -1,0 +1,42 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "out": "site",
+  "excludePrivate": true,
+  "treatWarningsAsErrors": true,
+  "validation": {
+    "notExported": true,
+    "invalidLink": true,
+    "notDocumented": true
+  },
+  "highlightLanguages": [
+    "bash",
+    "java",
+    "js",
+    "json",
+    "ts",
+    "typescript"
+  ],
+  "ignoredHighlightLanguages": [
+    "mermaid"
+  ],
+  "tsconfig": "./tsconfig.json",
+  "entryPoints": [
+    "src/index.ts",
+    "src/front-door-plugin.ts",
+    "src/serve-direct.ts",
+    "src/profiles/opencode.ts",
+    "src/deploy.ts",
+    "src/frontdoor.ts",
+    "src/plugin.ts"
+  ],
+  "name": "@intisy-ai/opencode-proxy",
+  "sourceLinkTemplate": "https://github.com/intisy-ai/opencode-proxy/blob/{gitRevision}/{path}#L{line}",
+  "externalSymbolLinkMappings": {
+    "@intisy-ai/core-ir": {
+      "*": "https://github.com/intisy-ai/core-ir"
+    },
+    "@intisy-ai/core-proxy": {
+      "*": "https://github.com/intisy-ai/core-proxy"
+    }
+  }
+}
