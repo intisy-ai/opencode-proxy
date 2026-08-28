@@ -4,6 +4,16 @@ import { copyFileSync, existsSync, mkdirSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
 
+/**
+ * Where the front-door adapter lands in one home.
+ *
+ * @remarks
+ * A generic path rather than one naming this app, because what resolves it at run time is
+ * `core-auth` inside each provider, which may name no app.
+ *
+ * @param configDir the home to deploy into.
+ * @returns the absolute path of the deployed adapter.
+ */
 export function frontDoorDeployPath(configDir: string): string {
   return join(configDir, "frontdoor", "app-frontdoor.mjs");
 }
@@ -16,6 +26,12 @@ function builtFrontDoorSource(): string {
   return candidates.find((path) => existsSync(path)) ?? candidates[0];
 }
 
+/**
+ * Copies the built adapter to that path, creating the directory if it is not there.
+ *
+ * @param configDir the home to deploy into.
+ * @returns where it landed.
+ */
 export function deployFrontDoor(configDir: string): string {
   const dest = frontDoorDeployPath(configDir);
   mkdirSync(dirname(dest), { recursive: true });

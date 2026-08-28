@@ -10,6 +10,16 @@ function configDir(): string {
   return process.env.HUB_CONFIG_DIR ?? join(homedir(), ".config", "opencode");
 }
 
+/**
+ * Redeploys the front-door adapter when this app loads its plugins.
+ *
+ * @remarks
+ * A backstop for the install-time deploy, and idempotent like it: a home installed before that step
+ * existed would otherwise never gain the adapter. A failure is swallowed, because the app must
+ * still start.
+ *
+ * @returns nothing this host acts on.
+ */
 export async function activate() {
   try {
     deployFrontDoor(configDir());
@@ -19,4 +29,5 @@ export async function activate() {
   return {};
 }
 
+/** The hook this app calls on load. */
 export default activate;

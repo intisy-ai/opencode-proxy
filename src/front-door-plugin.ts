@@ -12,10 +12,13 @@ import { opencodeProfile } from "./profiles/opencode.js";
  * shape the api declares.
  */
 const plugin = {
+  /** Hands the host this app's front door, under the capability id the engine mints for it. */
   activate(context: { provide: (id: string, implementation: unknown) => void }) {
     context.provide("front-door", frontDoor(opencodeProfile()));
   },
+  /** Nothing to tear down: the capability holds no resource of its own. */
   deactivate() {},
 };
 
+/** The capability this repo contributes, in the shape an in-process host duck-types. */
 export default plugin;
