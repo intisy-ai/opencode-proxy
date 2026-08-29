@@ -38,7 +38,7 @@
     "@intisy-ai/basekit": "^4.0.0"
   },
   "devDependencies": {
-    "@intisy-ai/api": "^1.6.0",
+    "@intisy/bayonet": "^1.7.0",
     "@types/node": "^22.0.0",
     "esbuild": "^0.21.5",
     "typedoc": "^0.28.20",

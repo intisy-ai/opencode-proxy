@@ -1,5 +1,5 @@
 import { frontDoor, FRONT_DOOR } from "@intisy-ai/basekit/proxy";
-import type { Plugin, PluginContext } from "@intisy-ai/api";
+import type { Plugin, PluginContext } from "@intisy/bayonet";
 import { opencodeProfile } from "./profiles/opencode.js";
 
 /**
