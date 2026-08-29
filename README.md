@@ -3,7 +3,7 @@
 [![npm version](https://img.shields.io/npm/v/opencode-proxy)](https://www.npmjs.com/package/opencode-proxy)
 [![npm downloads](https://img.shields.io/npm/dm/opencode-proxy)](https://www.npmjs.com/package/opencode-proxy)
 
-The OpenCode proxy layer (opencodeProfile) on top of the generic core-proxy engine
+The OpenCode proxy layer (opencodeProfile) on top of the generic basekit proxy engine
 
 The OpenCode proxy layer on top of the generic `core-proxy` engine.
 It provides `opencodeProfile` (the config filename, tier order/fallback,
