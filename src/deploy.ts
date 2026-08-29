@@ -1,5 +1,5 @@
 // Deploys the built front-door adapter to a generic, app-agnostic home path that
-// core-auth (in each provider) resolves at runtime as the injected AppFrontDoor.
+// basekit/auth (in each provider) resolves at runtime as the injected AppFrontDoor.
 import { copyFileSync, existsSync, mkdirSync } from "fs";
 import { dirname, join } from "path";
 import { fileURLToPath } from "url";
@@ -9,7 +9,7 @@ import { fileURLToPath } from "url";
  *
  * @remarks
  * A generic path rather than one naming this app, because what resolves it at run time is
- * `core-auth` inside each provider, which may name no app.
+ * `basekit/auth` inside each provider, which may name no app.
  *
  * @param configDir the home to deploy into.
  * @returns the absolute path of the deployed adapter.

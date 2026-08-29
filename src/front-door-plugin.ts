@@ -1,4 +1,4 @@
-import { frontDoor } from "@intisy-ai/core-proxy";
+import { frontDoor } from "@intisy-ai/basekit/proxy";
 import { opencodeProfile } from "./profiles/opencode.js";
 
 /**

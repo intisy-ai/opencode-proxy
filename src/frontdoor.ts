@@ -1,17 +1,17 @@
 // The OpenCode app<->IR front-door, owned by the app layer. Deployed to dist/frontdoor.mjs and
-// published so core-auth (in each provider) resolves it at runtime. Names OpenCode legitimately:
+// published so basekit/auth (in each provider) resolves it at runtime. Names OpenCode legitimately:
 // this is the app layer.
 import { serveDirect } from "./serve-direct.js";
 
 function authMethods(def: any, tk: any) {
-  if (typeof def.loginFlow !== "function") return [{ label: def.label + " (via core-auth)", type: "api" }];
+  if (typeof def.loginFlow !== "function") return [{ label: def.label + " (via basekit)", type: "api" }];
   return [{
     type: "oauth", label: def.label,
     authorize: async function () {
       if (def.accounts && tk.isTTY()) {
         try { await tk.runProviderMenu(def); } catch (e) { tk.log("account menu failed: " + e); }
         await tk.refreshModels(def, true);
-        return { url: "", instructions: def.label + " accounts updated.", method: "auto", callback: async () => ({ type: "success", refresh: "core-auth", access: "", expires: 0 }) };
+        return { url: "", instructions: def.label + " accounts updated.", method: "auto", callback: async () => ({ type: "success", refresh: "basekit", access: "", expires: 0 }) };
       }
       const flow = await def.loginFlow({ configDir: tk.configDir, log: tk.log });
       return {
@@ -35,7 +35,7 @@ function authMethods(def: any, tk: any) {
  * This app's own wire format, as the front door a provider is served through.
  *
  * @remarks
- * Published rather than imported: `core-auth` sits in the same layer as this repo, so it resolves
+ * Published rather than imported: `basekit/auth` sits in the same layer as this repo, so it resolves
  * this at run time from the deployed adapter instead of linking it.
  */
 export const appFrontDoor = {
