@@ -1,9 +1,9 @@
-// This barrel re-exports "@intisy-ai/core-proxy", so this test needs that package installed.
+// This barrel re-exports "@intisy-ai/basekit/proxy", so this test needs that package installed.
 // Mirrors claude-code-proxy's own index.test.ts, which has the identical dependency.
 import { expect, it, describe } from "vitest";
 import { createProxyServer, makeDynamicResolver, resolveModelMap, opencodeProfile, isValidProfile, proxyDef } from "./index.js";
 
-it("barrel: re-exports both the core-proxy engine and the opencode profile", () => {
+it("barrel: re-exports both the basekit proxy engine and the opencode profile", () => {
   expect(typeof createProxyServer).toBe("function");
   expect(typeof makeDynamicResolver).toBe("function");
   expect(typeof resolveModelMap).toBe("function");

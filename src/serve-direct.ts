@@ -2,7 +2,7 @@
 // this app's profile + translator against a provider's injected handleIr. Same profile the daemon
 // uses, so the two transports encode identically.
 
-import { serveIr, type ServeIrOptions } from "@intisy-ai/core-proxy";
+import { serveIr, type ServeIrOptions } from "@intisy-ai/basekit/proxy";
 import { opencodeProfile } from "./profiles/opencode.js";
 
 /**

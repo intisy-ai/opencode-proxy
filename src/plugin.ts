@@ -1,5 +1,5 @@
 // OpenCode plugin entry: on load, (re)deploy the front-door adapter to the generic home path so
-// core-auth (in each provider) resolves it. Backstop for the install-time deploy
+// basekit/auth (in each provider) resolves it. Backstop for the install-time deploy
 // (scripts/postbuild-deploy.mjs); both are idempotent. Self-contained (no core-* submodule) since
 // opencode-proxy nests none.
 import { homedir } from "os";

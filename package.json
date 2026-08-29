@@ -1,7 +1,7 @@
 {
   "name": "opencode-proxy",
-  "version": "2.1.0",
-  "description": "The OpenCode proxy layer (opencodeProfile) on top of the generic core-proxy engine",
+  "version": "2.2.0",
+  "description": "The OpenCode proxy layer (opencodeProfile) on top of the generic basekit proxy engine",
   "type": "module",
   "main": "dist/index.js",
   "license": "MIT",
@@ -28,15 +28,14 @@
     "node": ">=20.0.0"
   },
   "scripts": {
-    "build": "npx tsc && npx esbuild src/frontdoor.ts --bundle --platform=node --format=esm --outfile=dist/frontdoor.mjs && npx esbuild src/front-door-plugin.ts --bundle --platform=node --format=esm --external:@intisy-ai/core-proxy --external:@intisy-ai/core-ir --external:@intisy-ai/anthropic-translator --outfile=dist/front-door-plugin.js && node scripts/postbuild-deploy.mjs",
+    "build": "npx tsc && npx esbuild src/frontdoor.ts --bundle --platform=node --format=esm --outfile=dist/frontdoor.mjs && npx esbuild src/front-door-plugin.ts --bundle --platform=node --format=esm --external:@intisy-ai/basekit/proxy --external:@intisy-ai/basekit/ir --external:@intisy-ai/anthropic-translator --outfile=dist/front-door-plugin.js && node scripts/postbuild-deploy.mjs",
     "test": "vitest run",
     "prepublishOnly": "npm run build",
     "docs": "typedoc"
   },
   "dependencies": {
     "@intisy-ai/anthropic-translator": "^1.1.0",
-    "@intisy-ai/core-ir": "^1.4.0",
-    "@intisy-ai/core-proxy": "^2.0.0"
+    "@intisy-ai/basekit": "^4.0.0"
   },
   "devDependencies": {
     "@intisy-ai/api": "^1.6.0",
